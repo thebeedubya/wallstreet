@@ -6,6 +6,88 @@ Automated arbitrage detection and execution using secretary-tier agents running 
 
 ---
 
+## The Thesis: AI-Leveraged Retail
+
+This is NOT an institutional strategy. We are not competing with Citadel head-on. We are a retail trader with AI leverage, operating in markets institutions won't touch, collecting crumbs that are life-changing at our scale.
+
+### Why Retail + AI Wins Here
+
+| Institutional Constraint | Our Advantage |
+|-------------------------|---------------|
+| Compliance blocks prediction markets | No compliance department |
+| Legal blocks sports betting arb | Own risk tolerance |
+| AML policy blocks crypto-forex bridge | Can operate in gray areas |
+| $10M minimum position or don't bother | $500 position is meaningful |
+| 200-person committee to approve strategy | Decide in 5 minutes |
+| Can't use LLMs for trade decisions (infosec) | Claude/GPT is our co-pilot |
+| Quarterly reporting, investor drawdown limits | Answer to nobody |
+
+### The AI Leveling Effect
+
+Two years ago, earnings call NLP required a $2M/year team. Today: frontier models do it better than most custom models, transcripts are free (SEC EDGAR), local inference on 128GB VRAM is unlimited. The gap between institutional and retail analytical capability closes with every model generation. We don't need to match them. We need to be 80% as good at 0.01% of the cost, in markets they won't enter.
+
+### The Crumbs Strategy
+
+None of these modules are "viable institutional strategies." All of them are viable for one person with AI and no compliance overhead. DFV didn't beat Citadel with better infrastructure — he beat them with better conviction and asymmetric positioning. Our version: AI provides the analysis, we pick spots, we size for crumbs at their scale but real money at ours, and we do it 24/7 with agents that never sleep.
+
+---
+
+## Consortium Pressure Test (March 15, 2026)
+
+Five-model roundtable (Claude, GPT-5.4, Gemini 2.5 Pro, Grok 4, DeepSeek v3.1) unanimously pressure-tested this strategy. Full transcript: `data/consortium/consortium-2026-03-15T03-11-49.md`
+
+### What They Got Right — Incorporated
+
+**1. Unit Economics Per Trade (GPT)**
+Before projecting returns, every module must track:
+- Signal source and latency requirement
+- Expected edge per trade
+- Fees, slippage, and fill probability per trade
+- Max deployable capital before edge degrades
+- Failure modes and kill switch conditions
+
+**2. "Detected Edge vs Captured Edge" (GPT)**
+The only metric that matters. Track the full waterfall:
+```
+Gross theoretical spread
+→ Tradable spread at order submission
+→ Realized spread after fills
+→ Realized spread after fees
+→ Realized spread after operational loss
+```
+If captured edge is negative, the module dies regardless of how many opportunities the scanner "finds."
+
+**3. Risk Infrastructure Before Scaling**
+Before deploying serious capital, build:
+- Global kill switch (one command shuts everything down)
+- Per-module daily loss limits
+- Per-venue exposure limits
+- Stale data detection (exclude prices older than 60s)
+- Duplicate order prevention
+- Audit logs for every trade
+- PnL attribution by module, venue, and cost bucket
+- Tax lot tracking across asset classes
+
+**4. Module 6 Is Highest Ceiling**
+All five models agreed: AI Earnings Intelligence has the most durable, scalable edge. It's the only module where AI leverage is maximum and the edge is analytical, not speed-based. Priority: build this deepest.
+
+**5. Start Narrow, Prove, Expand**
+Don't build all 6 simultaneously. Sequence them. Prove each module's captured edge before adding the next. But don't kill any — they're all viable at retail scale.
+
+### What They Got Wrong — Rejected
+
+**"You can't compete because HFT exists"** — We're not competing with HFT. We're operating in markets they won't touch (prediction markets, sports betting, exotic crosses at $10K scale). Their compliance departments are our moat.
+
+**"Return projections are delusional"** — At institutional scale, yes. At retail scale collecting crumbs across 6 uncorrelated strategies 24/7 with zero labor cost, the math works differently. $500-2000 per arb trade, 5-10x per week, across multiple modules = real money.
+
+**"Pick one thing, spend 12 months studying"** — Institutional thinking. Retail moves fast, takes small positions, learns by doing with real money, and lets AI close the knowledge gap in hours, not years.
+
+**"Hyperspace AGI is a scam"** — Maybe. But contributing idle VRAM to a network costs nothing and returns either useful signals or nothing. Zero downside, potential upside. We don't bet the strategy on it — we run it as a free option on idle compute.
+
+**"Save your 750K"** — The entire consortium evaluated this as an institutional strategy competing with Renaissance. That's the wrong frame. We're a wallstreetbets persona with AI behind it. The crumbs they leave are our feast.
+
+---
+
 ## Module 1: Prediction Market Arbitrage (First Build)
 
 ### Cross-Platform Arb
@@ -402,16 +484,51 @@ The scanner doesn't predict news. It's already running when news hits. Every qua
 - **Execution risk:** Prices move between detection and order fill (slippage)
 - **Settlement risk:** Cross-platform — do both markets resolve the same event the same way?
 - **Account risk:** Sportsbooks ban winners. Prediction markets don't (yet).
-- **Regulatory risk:** Prediction market regulation still evolving in US
+- **Regulatory risk:** Prediction market regulation still evolving in US. Willing to accept gray area risk at retail scale.
 - **Liquidity risk:** Spread exists but order book too thin to fill at advertised price
 - **Capital lock-up:** Prediction markets can take months to settle (election markets)
+- **Legging risk:** One leg fills, other doesn't — leaves an unhedged directional position. Mitigate with position limits.
+- **Platform risk:** Venues can freeze accounts, change fees, alter APIs, reject withdrawals. Don't concentrate capital on any single venue.
+- **Catastrophic correlation:** In a true crisis, multiple modules may fail simultaneously. Hard daily loss limit across all modules.
+- **Model drift:** AI models change behavior across versions. Pin model versions for production, test before upgrading.
+
+## Mandatory Risk Infrastructure (Build Before Phase 2)
+
+- [ ] Global kill switch — one command, all modules stop, all orders cancelled
+- [ ] Per-module daily loss limit (configurable, default 2% of module allocation)
+- [ ] Per-venue exposure cap (no more than 30% of total capital on any single venue)
+- [ ] Stale data detection — exclude any price older than 60 seconds from arb calculations
+- [ ] Duplicate order prevention
+- [ ] Audit log for every trade (timestamp, venue, instrument, size, fill price, fees, slippage)
+- [ ] PnL attribution waterfall: detected spread → submitted spread → filled spread → net after fees
+- [ ] Tax lot tracking across all asset classes and venues
+- [ ] Weekly reconciliation: expected vs actual P&L per module
 
 ---
 
-## Timeline
+## Build Sequence (Revised Post-Consortium)
 
-Blocked on hardware (Kona/Runtz arrival). When iron arrives:
-1. Week 1: Polymarket MCP server + intra-platform scanner
-2. Week 2: Kalshi MCP server + cross-platform scanner
-3. Week 3: IBKR account setup + forex MCP server
-4. Week 4: Full system integration + paper trading validation
+Priority order based on: edge durability × AI leverage × retail advantage × capital efficiency
+
+### Phase 1: Foundation (Weeks 1-4)
+1. **Risk infrastructure** — kill switch, loss limits, audit logs, PnL waterfall tracker
+2. **Module 1: Intra-platform completeness arb** — single venue (Polymarket), pure math, proves the scanner and execution pipeline. $1K max. Goal: measure detected vs captured edge over 90 days.
+
+### Phase 2: Highest Ceiling (Weeks 5-12)
+3. **Module 6: AI Earnings Intelligence** — start with ONE sector (semis: NVDA, AMD, INTC, TSM, ASML). 10 years of transcripts. Build per-CEO language baselines. Paper trade first, then $5K live. Don't race speed — race interpretation quality on 1-5 day post-call drift.
+
+### Phase 3: Expand Proven Modules (Months 4-6)
+4. **Module 1 expansion** — add Kalshi for cross-platform arb. Scale capital on proven module.
+5. **Module 6 expansion** — add cloud (MSFT, GOOG, AMZN, META) and supply chain propagation.
+6. **Module 3: Crypto yield** — funding rate arb only (market-neutral, no capital-control plays initially). $10K on top-tier venues with strict risk caps.
+
+### Phase 4: Full Deployment (Months 7-12)
+7. **Module 2: Forex triangular** — IBKR paper trading first, exotics only. Prove the triangle math survives fees and slippage before live capital.
+8. **Module 4: Sports betting** — small scale, accept account mortality. Run until banned, rotate.
+9. **Module 5: Hyperspace** — install on idle compute. Free option. Zero capital at risk.
+10. **Phase 2 capital deployment ($750K)** — only after 6+ months of proven captured edge across multiple modules.
+
+### Ongoing
+- Track detected vs captured edge per module weekly
+- Kill any module where captured edge is negative for 30 consecutive days
+- Scale capital only to modules with proven positive captured edge
