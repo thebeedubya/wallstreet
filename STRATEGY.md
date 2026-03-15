@@ -212,6 +212,91 @@ Google Fiber (symmetric gigabit, low jitter) provides edge over retail competito
 | Robinhood | Existing? | Enable prediction markets |
 | Kraken or Coinbase | Check | API keys for crypto leg |
 | The Odds API | Not set up | $80/month subscription |
+| Hyperspace | Not set up | `curl install`, no account needed |
+
+---
+
+## Module 5: Hyperspace AGI Network — Distributed Alpha Generation
+
+### What It Is
+
+[hyperspaceai/agi](https://github.com/hyperspaceai/agi) — a distributed P2P network of autonomous AI agents that collaboratively train models, share experiments via gossip protocol, and evolve strategies through mutation + selection. The commits in the repo are made by agents, not humans.
+
+### AutoQuant (v2.6.9)
+
+Hyperspace pointed Karpathy's autoresearch loop at quantitative finance. 135 autonomous agents evolved multi-factor trading strategies — mutating factor weights, position sizing, risk controls — backtesting against 10 years of market data, sharing discoveries via P2P gossip.
+
+**What agents found (no human instruction):**
+- Started: 8-factor equal-weight portfolios, Sharpe ~1.04
+- Agents independently converged on dropping dividend, growth, and trend factors
+- Switched to risk-parity position sizing
+- Result: **Sharpe 1.32, 3x return, 5.5% max drawdown**
+- Parsimony wins — fewer factors, better performance
+- Cross-pollination via gossip accelerated convergence
+
+### 5 Research Domains
+
+| Domain | Metric | Relevance |
+|--------|--------|-----------|
+| Machine Learning | Validation loss | Model improvement |
+| Search Engine | NDCG@10 | — |
+| **Financial Analysis** | **Sharpe ratio** | **Direct alpha generation** |
+| Skills & Tools | Test pass rate | Agent capability |
+| Causes | Domain-specific | — |
+
+### 9 Node Capabilities
+
+Inference (GPU model serving), Research (ML training), Proxy (residential IP), Storage (DHT blocks), Embedding (CPU vectors), Memory (distributed vector store), Orchestration (multi-step task routing), Validation (proof verification), Relay (NAT traversal).
+
+### How to Join
+
+```bash
+curl -fsSL https://agents.hyper.space/api/install | bash
+hyperspace models pull --auto
+hyperspace start
+```
+
+No API keys, no account registration, no port config. libp2p handles NAT traversal. Ed25519 for identity.
+
+### GPU Model Recommendations
+
+| VRAM | Model |
+|------|-------|
+| 4GB | Gemma 3 1B |
+| 8GB | Gemma 3 4B |
+| 16GB | Gemma 3 12B |
+| 48GB | Gemma 3 27B |
+| 80GB+ | Qwen2.5 Coder 32B |
+
+### Our Fleet on the Network
+
+| Machine | VRAM | Est. Points/Month |
+|---------|------|-------------------|
+| Kona | 128GB | 44K+ |
+| Runtz | 128GB | 44K+ |
+| Kush | 36GB | ~20K |
+
+With 256GB+ VRAM we'd be one of the bigger nodes. Points earned + access to financial research discoveries from the entire network.
+
+### How It Fits
+
+| Component | Role |
+|-----------|------|
+| **Rust arb scanner** | Speed — detects mispricing in real-time (our build) |
+| **Hyperspace agents** | Alpha — evolve trading strategies through collective research (their network) |
+| **Claude thinker** | Judgment — evaluates opportunities before execution (on-demand) |
+
+The arb scanner finds **risk-free math**. Hyperspace agents find **risk-adjusted alpha**. Different problems, complementary approaches. Run Hyperspace on idle compute cycles — when machines aren't scanning or doing FORGE inference, they contribute to the network and receive strategy insights.
+
+### Why Now
+
+"These are the small moments where money is made." — Brad
+
+The network is early. 135 agents, growing. Being a large node early means:
+- More influence on research direction
+- Early access to discoveries via gossip
+- Point accumulation before the network scales and dilutes
+- Reputation as a serious node
 
 ---
 
@@ -222,6 +307,7 @@ Google Fiber (symmetric gigabit, low jitter) provides edge over retail competito
 3. **Exotic forex triangular arb** — IBKR integration, more complex execution
 4. **Crypto-forex bridge** — connects crypto + forex legs
 5. **Sports betting arb** — highest volume but account limiting risk
+6. **Hyperspace node** — install on Kona/Runtz, join financial research network, earn points on idle cycles
 
 ---
 
