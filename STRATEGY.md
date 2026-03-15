@@ -313,10 +313,28 @@ The network is early. 135 agents, growing. Being a large node early means:
 
 ## Capital Requirements
 
-- **Prediction markets:** Start with $1K to prove system, scale to $50K+
-- **Forex:** $10K+ for meaningful margin account on IBKR
-- **Crypto:** Variable, depends on exchange minimums
-- **Total to start:** ~$5K to validate all modules
+### Phase 1: Prove the System ($5-10K)
+- Paper trading on all modules for 30 days
+- Live with small capital ($1-2K per module) for 30 days
+- Track every arb detected, executed, and missed
+- Prove the scanner catches real opportunities consistently
+
+### Phase 2: Scale ($750K committed on proof)
+
+| Strategy | Allocation | Conservative | Aggressive |
+|----------|-----------|-------------|------------|
+| Prediction market arb (all modes) | $200K | $40-60K/yr | $80-120K/yr |
+| Forex triangular (exotics, IBKR margin) | $250K | $25-50K/yr | $75-125K/yr |
+| Crypto yield + funding rate | $150K | $22-45K/yr | $45-75K/yr |
+| Hyperspace alpha strategies | $100K | $15-25K/yr | $30-50K/yr |
+| Crisis reserve (dry powder) | $50K | — | Deployed during fat spreads |
+| **Total** | **$750K** | **$102-180K/yr** | **$230-370K/yr** |
+
+The crisis reserve stays liquid. When geopolitical events (Iran, elections, black swans) blow spreads to 5-10x normal, deploy into the fattest opportunities. This is where outsized returns come from — having capital ready when everyone else is panicking.
+
+### The Thesis
+
+The scanner doesn't predict news. It's already running when news hits. Every quarter delivers a catalyst: geopolitical crisis, election cycle, crypto event, central bank surprise, new platform launch. The infrastructure cost is fixed (owned hardware). The news cycle is the product.
 
 ---
 
