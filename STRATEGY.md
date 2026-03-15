@@ -300,6 +300,64 @@ The network is early. 135 agents, growing. Being a large node early means:
 
 ---
 
+## Module 6: AI Earnings Intelligence — The Original Thesis
+
+### Concept
+
+Real-time NLP inference on live earnings calls, trained on 10 years of transcripts per company. Detect sentiment shifts, guidance softening, hedging language, and executive tone changes BEFORE the market prices them. Trade the stock and — critically — the entire supply chain.
+
+### Data Sources
+
+- **10 years of earnings transcripts** — ~40K calls (S&P 500 × 40 quarters). Training data for per-CEO/CFO language baselines.
+- **Live audio feed** — real-time inference during the call. ~4 calls/day during earnings season.
+- **SEC filings** (10-K, 10-Q) — risk factors, segment data, guidance cross-reference.
+- **Supply chain graph** — who sells to whom. Public data. Maps upstream suppliers, downstream customers, competitors.
+- **Options flow** — pre-earnings positioning as a leading signal.
+
+### Signal Types
+
+| Signal | Example | Trade |
+|--------|---------|-------|
+| Hedging language increase | "We expect" → "We hope" | Short or put |
+| Guidance softening | Subtle word choice shift | Fade the stock |
+| Executive stress indicators | Tone/cadence changes (audio) | Directional bet |
+| Question dodging | Analyst asks margins, CEO talks revenue | Short |
+| New risk factor mentions | First mention of competitor/regulation | Sector rotation |
+| Supply chain inference | NVDA beats → TSMC order flow up | Long upstream |
+| Macro correlation | "AI spending acceleration" | Sector ETF long |
+
+### The Macro Graph
+
+One earnings call → 10+ tradeable signals across the supply chain:
+
+```
+Company earnings call (live)
+├── Direct: stock move
+├── Upstream: supplier inference (orders, inventory)
+├── Downstream: customer inference (spending, adoption)
+├── Competitors: market share language → pressure signals
+└── Macro: sector ETFs, thematic plays
+```
+
+The market prices the reporting company in seconds. Second and third order effects on supply chain take HOURS TO DAYS. That's the window.
+
+### Speed Advantage
+
+- Generic traders: wait for transcript (30-60 min delay) or analyst summary (hours)
+- Our system: inferring on sentence 3 of CEO's opening remarks
+- 10 years of per-CEO baseline means "encouraged" from Satya ≠ "encouraged" from Pichai
+- Live audio analysis catches tone that transcripts miss entirely
+
+### Tech Stack
+
+- **Whisper/Parakeet** — real-time speech-to-text on live audio
+- **Fine-tuned LLM** — trained on 10 years of per-CEO language patterns
+- **Supply chain graph** — Neo4j or similar, maps all public company relationships
+- **Execution** — IBKR API for stock + options trades
+- **Signal aggregation** — combine transcript signal + options flow + supply chain position
+
+---
+
 ## Build Order
 
 1. **Prediction market intra-platform completeness arb** — simplest math, single platform, proves infrastructure
@@ -308,6 +366,7 @@ The network is early. 135 agents, growing. Being a large node early means:
 4. **Crypto-forex bridge** — connects crypto + forex legs
 5. **Sports betting arb** — highest volume but account limiting risk
 6. **Hyperspace node** — install on Kona/Runtz, join financial research network, earn points on idle cycles
+7. **Earnings intelligence** — transcript corpus + live call inference + supply chain macro bets (the original thesis)
 
 ---
 
