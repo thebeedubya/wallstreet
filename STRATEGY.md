@@ -74,6 +74,53 @@ All five models agreed: AI Earnings Intelligence has the most durable, scalable 
 **5. Start Narrow, Prove, Expand**
 Don't build all 6 simultaneously. Sequence them. Prove each module's captured edge before adding the next. But don't kill any — they're all viable at retail scale.
 
+### What the Research Says (The Consortium Didn't Look)
+
+The consortium opined from training data. We did the actual research. The cutting edge contradicts their core assumptions.
+
+**Prediction Market Arb — Proven, Not Theoretical:**
+- $40M in arb profits extracted from Polymarket alone, April 2024 - April 2025 (IMDEA Networks Institute, arXiv:2508.03474)
+- One automated bot: 8,894 trades, ~$150K profit, zero human intervention. 1.5-3% per trade on completeness gaps (CoinDesk, Feb 2026)
+- Wall Street quants actively moving INTO prediction markets for arb (FinanceMagnates)
+- Prediction market arb specialists being hired at $200K salaries
+- Volumes: $100M/month (early 2024) → $8B/month (Dec 2025). More volume = more mispricing.
+- Open source arb bot exists: github.com/realfishsam/prediction-market-arbitrage-bot
+
+**Earnings Call NLP — NOT Solved, Newly Cracked Open:**
+- S&P Global published "From Lexicon to LLM" (Sep 2025) — the entire field is being rewritten with frontier LLMs. BERT-era approaches are obsolete.
+- LSEG (London Stock Exchange Group) building LLM-based earnings analysis for institutional alpha
+- Key finding: overall transcript sentiment is USELESS. Segment-level sentiment (by business unit) predicts price moves. This changes Module 6 architecture entirely.
+- ECC Analyzer (arXiv:2404.18470): hierarchical extraction from earnings calls using RAG for volatility prediction
+- MarketSenseAI 2.0 (arXiv:2502.00415): RAG + LLM agents processing SEC filings + earnings calls
+- 192,000 earnings call transcripts analyzed with LLM embeddings to quantify CEO transparency
+- "Firms with high sentiment (top 10%) during earnings calls have significant next-month outperformance" — published, peer-reviewed signal
+
+**AI Trading Bots — Retail IS Making Money:**
+- Top AI trading platforms showing 12-25% annualized returns
+- Some platforms achieving 40%+ annualized with profit factors over 4.0 (Tickeron, Trade Ideas)
+- Global AI trading market: $24.53 billion in 2025
+- 2026 evolution: bots are now AI Agents scanning X/news, adjusting in real-time
+
+### Applied Research Insights
+
+**1. Segment-Level Sentiment (S&P Global):**
+Don't analyze the whole transcript as one blob. Break earnings calls into business segments. Score each segment independently. The alpha is in segment-level divergence from expectations, not overall tone.
+
+**2. Hierarchical RAG Extraction (ECC Analyzer):**
+Use retrieval-augmented generation to extract paragraph-level signals + fine-grained focus sentences. Don't feed the whole transcript to Claude — extract structured features first, then reason over them.
+
+**3. Post-Call Drift Window (1-5 days):**
+The market prices headline numbers (EPS, revenue) in seconds. But nuance — guidance softening, segment weakness, supply chain signals — takes 1-5 days to fully price. That's the window. Don't race speed. Race interpretation quality.
+
+**4. Per-CEO Language Baselines (LSEG / 192K transcripts):**
+LLM embeddings across 10 years of a specific CEO's calls create a "normal" baseline. Deviation from that baseline IS the signal. "Encouraged" from Satya ≠ "encouraged" from Pichai. The model must know each executive's personal language fingerprint.
+
+**5. Look-Ahead Bias Guard (arXiv):**
+LLMs trained on data including future information can leak it into predictions. When backtesting Module 6, use models with knowledge cutoffs BEFORE the earnings date being tested. Pin model versions. This is a known failure mode the papers warn about.
+
+**6. Completeness Arb at Scale (IMDEA):**
+$40M proven. 1.5-3% per trade. 8,894 trades automated. This is not theoretical — it's documented, peer-reviewed, and happening right now.
+
 ### What They Got Wrong — Rejected
 
 **"You can't compete because HFT exists"** — We're not competing with HFT. We're operating in markets they won't touch (prediction markets, sports betting, exotic crosses at $10K scale). Their compliance departments are our moat.
@@ -430,13 +477,49 @@ The market prices the reporting company in seconds. Second and third order effec
 - 10 years of per-CEO baseline means "encouraged" from Satya ≠ "encouraged" from Pichai
 - Live audio analysis catches tone that transcripts miss entirely
 
+### Architecture (Research-Informed)
+
+Based on S&P Global, LSEG, ECC Analyzer, and MarketSenseAI 2.0 research:
+
+```
+Earnings Call Pipeline:
+
+1. INGEST: Live audio → Whisper/Parakeet STT → raw transcript
+2. SEGMENT: Break transcript into business segments (not one blob)
+3. EXTRACT: Hierarchical RAG extraction per segment
+   ├── Paragraph-level signals (guidance, risk, outlook)
+   ├── Fine-grained focus sentences (hedging, dodging, softening)
+   └── Structured features (NOT vibes):
+       - Guidance delta language score
+       - Uncertainty marker count
+       - Question-dodging index
+       - Response evasiveness score
+       - Sentiment deviation from CEO's 10-year baseline
+       - Modal verb shifts ("will" → "may" → "hope")
+       - Answer length vs analyst question complexity
+       - New risk factor mentions (first-time topics)
+4. COMPARE: Per-CEO language fingerprint (LLM embeddings across 10yr baseline)
+   └── "Is this CEO more hedging than their personal normal?"
+5. SCORE: Segment-level sentiment (not aggregate) → per-segment alpha signal
+6. PROPAGATE: Supply chain graph
+   ├── Upstream supplier inference
+   ├── Downstream customer inference
+   └── Competitor read-through
+7. TRADE: 1-5 day post-call drift (NOT sentence-3 speed)
+   ├── IBKR API for stock + options
+   └── Position sizing based on signal confidence + liquidity
+```
+
 ### Tech Stack
 
-- **Whisper/Parakeet** — real-time speech-to-text on live audio
-- **Fine-tuned LLM** — trained on 10 years of per-CEO language patterns
-- **Supply chain graph** — Neo4j or similar, maps all public company relationships
+- **Whisper/Parakeet** — real-time speech-to-text on live audio (local, 128GB VRAM)
+- **Frontier LLM** — Claude/GPT for structured feature extraction (NOT sentiment classification)
+- **RAG pipeline** — hierarchical extraction per ECC Analyzer architecture
+- **Embedding store** — per-CEO 10-year language baseline vectors (Qdrant)
+- **Supply chain graph** — Neo4j, maps all public company relationships
 - **Execution** — IBKR API for stock + options trades
-- **Signal aggregation** — combine transcript signal + options flow + supply chain position
+- **Signal aggregation** — segment-level features + options flow + supply chain position
+- **Backtesting** — walk-forward splits, conservative fills, look-ahead bias guard (pin model versions pre-earnings date)
 
 ---
 
